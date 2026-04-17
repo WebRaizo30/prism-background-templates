@@ -1,0 +1,13 @@
+# Dependencies & build (when you add Node later)
+node_modules/
+dist/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+.env
+.env.*.local
