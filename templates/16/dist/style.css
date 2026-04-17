@@ -1,0 +1,64 @@
+/* Prism: viewport lock (no page scroll in preview) */
+html {
+  overflow: hidden;
+  height: 100%;
+}
+body {
+  overflow: hidden;
+  min-height: 100%;
+}
+/* Random background cycle — CSS vars set by script.js (Prism Engine). */
+:root {
+  --prism-edge: #ffffff;
+  --prism-15: #ff0000;
+  --prism-30: #ffff00;
+  --prism-45: #008000;
+  --prism-60: #0000ff;
+  --prism-75: #ffffff;
+  --prism-anim-dur: 5s;
+  --prism-center-bg: #debe94;
+  --prism-center-size: 100px;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background-color: var(--prism-edge);
+  -webkit-animation: random var(--prism-anim-dur) infinite;
+  animation: random var(--prism-anim-dur) infinite;
+}
+
+@keyframes random {
+  0%,
+  100% {
+    background-color: var(--prism-edge);
+  }
+  15% {
+    background-color: var(--prism-15);
+  }
+  30% {
+    background-color: var(--prism-30);
+  }
+  45% {
+    background-color: var(--prism-45);
+  }
+  60% {
+    background-color: var(--prism-60);
+  }
+  75% {
+    background-color: var(--prism-75);
+  }
+}
+
+.center {
+  background: var(--prism-center-bg);
+  width: var(--prism-center-size);
+  height: var(--prism-center-size);
+  transition: all 0.3s ease-out;
+  margin: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}

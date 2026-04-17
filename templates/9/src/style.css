@@ -1,0 +1,47 @@
+/* Prism: viewport lock (no page scroll in preview) */
+html {
+  overflow: hidden;
+  height: 100%;
+}
+body {
+  overflow: hidden;
+  min-height: 100%;
+}
+/* Cool infinite background scrolling animation. Twitter: @kootoopas
+ * Prism: CSS variables + configurable label (see script.js). */
+
+@import url(https://fonts.googleapis.com/css?family=Exo:100);
+
+:root {
+  --prism-tile: 50px;
+  --prism-duration: 0.92s;
+  --prism-text-color: #999999;
+  --prism-label-size: 8rem;
+  --prism-body-margin-top: 13.5rem;
+  --prism-bg-url: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAIAAACRXR/mAAAACXBIWXMAAAsTAAALEwEAmpwYAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAABnSURBVHja7M5RDYAwDEXRDgmvEocnlrQS2SwUFST9uEfBGWs9c97nbGtDcquqiKhOImLs/UpuzVzWEi1atGjRokWLFi1atGjRokWLFi1atGjRokWLFi1af7Ukz8xWp8z8AAAA//8DAJ4LoEAAlL1nAAAAAElFTkSuQmCC");
+}
+
+@keyframes bg-scrolling-reverse {
+  100% {
+    background-position: var(--prism-tile) var(--prism-tile);
+  }
+}
+
+body {
+  margin: 0;
+  margin-top: var(--prism-body-margin-top);
+  color: var(--prism-text-color);
+  font: 400 16px/1.5 exo, ubuntu, "segoe ui", helvetica, arial, sans-serif;
+  text-align: center;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: var(--prism-bg-url) repeat 0 0;
+  animation: bg-scrolling-reverse var(--prism-duration) infinite linear;
+}
+
+.infinity-label {
+  margin: 0;
+  font-size: var(--prism-label-size);
+  font-weight: 100;
+  font-style: normal;
+}

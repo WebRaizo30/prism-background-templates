@@ -1,0 +1,61 @@
+/* Prism: viewport lock (no page scroll in preview) */
+html {
+  overflow: hidden;
+  height: 100%;
+}
+body {
+  overflow: hidden;
+  min-height: 100%;
+}
+/* Cloudy spiral — Prism: CSS variables + JS particle transforms (see script.js). */
+
+:root {
+  --prism-bg: #3e6fa3;
+  --prism-particle: 8px;
+  --prism-lap: 3s;
+}
+
+html,
+body {
+  overflow: hidden;
+  margin: 0;
+  height: 100%;
+  background: var(--prism-bg);
+}
+
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  perspective: 500px;
+}
+
+.wrapper i {
+  display: block;
+  position: absolute;
+  width: var(--prism-particle);
+  height: var(--prism-particle);
+  border-radius: 50%;
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.5);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 1);
+  animation-name: spin;
+  animation-duration: var(--prism-lap);
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes spin {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.6;
+    transform: translate3d(
+      calc(var(--prism-particle) * -0.5),
+      calc(var(--prism-particle) * -0.5),
+      570px
+    );
+  }
+}

@@ -1,6 +1,13 @@
+/* Prism: viewport lock (no page scroll in preview) */
+html {
+  overflow: hidden;
+  height: 100%;
+}
 body {
+  overflow: hidden;
+  min-height: 100%;
   margin: 0;
-  background: black;
+  background: #080808;
 }
 
 canvas {

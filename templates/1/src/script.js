@@ -1,3 +1,4 @@
+/** Shape Wave — Prism: configurable via window.__prismShapeWave.applyConfig */
 var gap = 40;
 var radiusVmin = 30;
 var speedIn = 0.5;
@@ -7,6 +8,62 @@ var minHoverScale = 1;
 var maxHoverScale = 3;
 var waveSpeed = 1200;
 var waveWidth = 180;
+var bgColor = '#080808';
+
+var PRISM_DEFAULTS = {
+  gap: 40,
+  radiusVmin: 30,
+  speedIn: 0.5,
+  speedOut: 0.6,
+  restScale: 0.09,
+  minHoverScale: 1,
+  maxHoverScale: 3,
+  waveSpeed: 1200,
+  waveWidth: 180,
+  bgColor: '#080808',
+};
+
+function clamp(n, a, b) {
+  return Math.max(a, Math.min(b, n));
+}
+
+function applyPrismConfig(partial) {
+  if (!partial || typeof partial !== 'object') return;
+  if (partial.gap != null) gap = clamp(Number(partial.gap), 16, 96);
+  if (partial.radiusVmin != null) radiusVmin = clamp(Number(partial.radiusVmin), 10, 60);
+  if (partial.speedIn != null) speedIn = clamp(Number(partial.speedIn), 0.05, 0.95);
+  if (partial.speedOut != null) speedOut = clamp(Number(partial.speedOut), 0.05, 0.95);
+  if (partial.restScale != null) restScale = clamp(Number(partial.restScale), 0.02, 0.25);
+  if (partial.minHoverScale != null) minHoverScale = clamp(Number(partial.minHoverScale), 0.5, 2);
+  if (partial.maxHoverScale != null) maxHoverScale = clamp(Number(partial.maxHoverScale), 1.5, 6);
+  if (partial.waveSpeed != null) waveSpeed = clamp(Number(partial.waveSpeed), 200, 4000);
+  if (partial.waveWidth != null) waveWidth = clamp(Number(partial.waveWidth), 40, 500);
+  if (partial.bgColor != null && typeof partial.bgColor === 'string') {
+    bgColor = partial.bgColor;
+    if (document.body) document.body.style.background = partial.bgColor;
+  }
+  waves = [];
+  init();
+}
+
+function getPrismState() {
+  return {
+    gap: gap,
+    radiusVmin: radiusVmin,
+    speedIn: speedIn,
+    speedOut: speedOut,
+    restScale: restScale,
+    minHoverScale: minHoverScale,
+    maxHoverScale: maxHoverScale,
+    waveSpeed: waveSpeed,
+    waveWidth: waveWidth,
+    bgColor: bgColor,
+  };
+}
+
+function resetPrismToDefaults() {
+  applyPrismConfig(PRISM_DEFAULTS);
+}
 
 var PALETTE = [
   { type: 'solid', value: '#22c55e' },
@@ -138,6 +195,7 @@ function buildGrid() {
 }
 
 function init() {
+  waves = [];
   var W = window.innerWidth;
   var H = window.innerHeight;
   var dpr = window.devicePixelRatio || 1;
@@ -162,7 +220,7 @@ function tick() {
   var now = performance.now();
 
   ctx.clearRect(0, 0, width, height);
-  ctx.fillStyle = '#080808';
+  ctx.fillStyle = bgColor;
   ctx.fillRect(0, 0, width, height);
 
   activity *= 0.93;
@@ -261,11 +319,25 @@ function triggerWave(x, y) {
   setTimeout(function() { maskOverride = false; }, delay * 1000);
 }
 
-init();
+if (document.body) document.body.style.background = bgColor;
+
+/** Set by Prism export — applied before the first frame. */
+if (typeof window !== 'undefined' && window.__PRISM_BOOTSTRAP) {
+  applyPrismConfig(window.__PRISM_BOOTSTRAP);
+} else {
+  init();
+}
 rafId = requestAnimationFrame(tick);
 
 window.addEventListener('resize', init);
 window.addEventListener('pointermove', onMove);
 window.addEventListener('click', onClick);
+
+window.__prismShapeWave = {
+  applyConfig: applyPrismConfig,
+  getState: getPrismState,
+  reset: resetPrismToDefaults,
+  defaults: PRISM_DEFAULTS,
+};
 
 triggerWave();

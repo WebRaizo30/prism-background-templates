@@ -1,6 +1,7 @@
 # Dependencies & build (when you add Node at repo root)
 node_modules/
 /dist/
+package-lock.json
 
 # OS / editor
 .DS_Store
