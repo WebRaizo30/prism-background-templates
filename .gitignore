@@ -1,6 +1,6 @@
-# Dependencies & build (when you add Node later)
+# Dependencies & build (when you add Node at repo root)
 node_modules/
-dist/
+/dist/
 
 # OS / editor
 .DS_Store
