@@ -11,6 +11,8 @@
 [![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 
+**Live demo →** [prism-background-templates.vercel.app](https://prism-background-templates.vercel.app/)
+
 <br />
 
 </div>
@@ -49,8 +51,8 @@ That’s it. Iterate until it feels right, then export.
 **Requirements:** [Node.js](https://nodejs.org/) **18+** (LTS recommended).
 
 ```bash
-git clone <your-repo-url>
-cd <repo-folder>
+git clone https://github.com/WebRaizo30/prism-background-templates.git
+cd prism-background-templates
 npm install
 npm run dev
 ```
@@ -74,7 +76,9 @@ npm run preview
 
 ## Deploy (e.g. Vercel)
 
-Prism is a **static SPA** after `vite build`. Point your host at the **`dist`** folder (Vercel: set **Output Directory** to `dist`, **Install** `npm install`, **Build** `npm run build`).
+**Production:** [https://prism-background-templates.vercel.app/](https://prism-background-templates.vercel.app/)
+
+Prism is a **static SPA** after `vite build`. Point your host at the **`dist`** folder (Vercel: **Output Directory** `dist`, **Build** `npm run build`, **Install** `npm install`).
 
 If the site is **not** at the domain root, set Vite [`base`](https://vitejs.dev/config/shared-options.html#base) to your path prefix and rebuild.
 
